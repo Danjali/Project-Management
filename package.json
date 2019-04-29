@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "description": "a webpack based react app for",
   "main": "./build/index.html",
-  "proxy": "http://localhost:5000/",
   "scripts": {
     "webpack": "webpack",
     "start": "webpack-dev-server --env.development ./webpack.config.js --content-base --colors",

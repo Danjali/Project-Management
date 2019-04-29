@@ -12,7 +12,8 @@ export default class App extends React.Component {
       showForm: false,
       projectList: projectData.projects,
       searchedItems: projectData.projects,
-      showSuccessPopup: false
+      showSuccessPopup: false,
+      addProjectMsg:''
     };
     this.addProject = this.addProject.bind(this);
     this.searchItem = this.searchItem.bind(this);
@@ -38,34 +39,40 @@ export default class App extends React.Component {
   }
   
   sendData(data) {
-    let requestPayload = {
+    const requestPayload = {
       key: data.projectId,
       name: data.projectName,
       description: data.projectDescription
     };
-    let base64 = require('base-64');
-    let username = 't.m.mahajan@gmail.com';
-    let password = 'Tej.12345';
-    let headers = new Headers();
+    const base64 = require('base-64'),
+      username = 't.m.mahajan@gmail.com',
+      password = 'Tej.12345',
+      headers = new Headers();
     headers.append('Content-Type', 'application/json');
     headers.set(
       'Authorization',
       'Basic ' + base64.encode(username + ':' + password)
     );
-    fetch('https://api.bitbucket.org/2.0/teams/shared_teamtest1/projects/', {
+    fetch('http://localhost:5000/api/addProject', {
       method: 'POST',
       body: JSON.stringify(requestPayload),
       headers: headers
     })
-      .then(res => res.json())
       .then(response => {
-        this.setState({
-          searchedItems: this.state.projectList,
-          showForm: false,
-          showSuccessPopup: true
-        });
+        if(response.ok) {
+          this.setState({
+            searchedItems: this.state.projectList,
+            showForm: false,
+            showSuccessPopup: true,
+            addProjectMsg:'Project has been added successfully!!'
+          });
+        }
       })
-      .catch(error => console.error('Error:', error));
+      .catch(error => this.setState({
+        showForm: false,
+        showSuccessPopup: true,
+        addProjectMsg:'Error!! Project has not been added.'
+      }));
   }
 
   closeForm() {
@@ -87,15 +94,13 @@ export default class App extends React.Component {
   }
 
   render() {
-    let { searchedItems } = this.state;
+    let { searchedItems,addProjectMsg } = this.state;
     return (
       <div className="app">
         <div>
           <div className="appHeader">
             <h1>Project Management Application</h1>
-            <div>
-              <Search searchItem={this.searchItem} />
-            </div>
+            <Search searchItem={this.searchItem} />
             <input
               type="button"
               value="Add Project"
@@ -103,21 +108,15 @@ export default class App extends React.Component {
               onClick={this.addProject}
             />
           </div>
-          <div>
-            <Card projectDetails={searchedItems} />
-          </div>
+          <Card projectDetails={searchedItems} />
           {this.state.showForm && (
-            <div>
-              <AddProjectForm
-                saveProject={this.saveProject}
-                closeForm={this.closeForm}
-              />
-            </div>
+            <AddProjectForm
+              saveProject={this.saveProject}
+              closeForm={this.closeForm}
+            />
           )}
           {this.state.showSuccessPopup && (
-            <div>
-              <SuccessPopUp closePopup={this.closePopup} />
-            </div>
+            <SuccessPopUp closePopup={this.closePopup} msg={addProjectMsg} />
           )}
         </div>
       </div>

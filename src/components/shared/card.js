@@ -9,9 +9,9 @@ export default class Card extends React.Component {
         {projectDetails.map((item, index) => {
           return (
             <div key={index} className="card">
-                <h3 className="card-header">
+              <h3 className="card-header">
                   Project Name: {item.projectName}
-                </h3>
+              </h3>
               <div className="card-content">
                 <p className="card-text">
                   Project Description: {item.projectDescription}

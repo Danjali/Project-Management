@@ -14,7 +14,7 @@ export default class SuccessPopUp extends React.Component {
     return (
       <div className="popup">
         <div className="successPopUpContent">
-          <h3>Project has been added successfully!!</h3>
+          <h3>{this.props.msg}</h3>
           <button className="btn redBtn" onClick={this.closePopup}>
             OK
           </button>
