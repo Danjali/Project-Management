@@ -59,13 +59,19 @@ export default class App extends React.Component {
       headers: headers
     })
       .then(response => {
-        if(response.ok) {
+        if(response.ok){
           this.setState({
             searchedItems: this.state.projectList,
             showForm: false,
             showSuccessPopup: true,
             addProjectMsg:'Project has been added successfully!!'
           });
+        } else{
+          this.setState({
+            showForm: false,
+            showSuccessPopup: true,
+            addProjectMsg:'Error!! Project has not been added.'
+          })
         }
       })
       .catch(error => this.setState({
