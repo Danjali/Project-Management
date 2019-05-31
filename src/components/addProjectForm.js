@@ -5,7 +5,7 @@ export default class AddProjectForm extends React.Component {
     super();
     this.state = {
       validForm: false,
-      tempStore: []
+      tempStore: {},
     };
     this.handleAdd = this.handleAdd.bind(this);
     this.handleClose = this.handleClose.bind(this);
@@ -21,7 +21,9 @@ export default class AddProjectForm extends React.Component {
       projectLocation: this.refs.projectLocation.value,
       projectId: (
         this.refs.projectName.value + this.refs.projectLocation.value
-      ).replace(/ /g, '')
+      ).replace(/ /g, ''),
+      projectType: this.refs.projectType.value,
+      platform: this.refs.platform.value,
     };
     this.props.saveProject(this.state.tempStore);
   }
@@ -42,7 +44,7 @@ export default class AddProjectForm extends React.Component {
         <div className="addFormPopUp">
           <form>
             <div className="form-group">
-              <h2>Add Project</h2>
+              <h3>Add Project</h3>
               <hr className="newLine" />
               <label>Project Name</label>
               <input
@@ -60,6 +62,17 @@ export default class AddProjectForm extends React.Component {
                 ref="projectDescription"
                 placeholder="Enter project description"
               />
+              <label>Project Type</label>
+              <select ref="projectType" onChange={this.handleChange} className="form-control">
+                <option value="UI">UI</option>
+                <option value="Backend Service">Backend Service</option>
+              </select>
+              <label>Platform</label>
+              <select ref="platform" className="form-control" >
+                <option value="PCF">PCF</option>
+                <option value="AMP">AMP</option>
+                <option value="SF">SF</option>
+              </select>
               <label>Contact Number</label>
               <input
                 type="text"

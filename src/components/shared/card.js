@@ -1,8 +1,6 @@
 import React from 'react';
-
-export default class Card extends React.Component {
-  render() {
-    let { projectDetails } = this.props;
+const Card = (props) => {
+    let { projectDetails } = props;
     return (
       <div>
         <h2 className="listHeading">Project List</h2>
@@ -27,5 +25,6 @@ export default class Card extends React.Component {
         })}
       </div>
     );
-  }
-}
+};
+export default Card;
+
