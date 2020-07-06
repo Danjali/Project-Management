@@ -25,7 +25,6 @@
   "bugs": {
     "url": "https://github.com/Danjali/React_ProjectManagement_Application.git/issues"
   },
-  "homepage": "https://github.com/Danjali/React_ProjectManagement_Application.git#readme",
   "dependencies": {
     "base-64": "0.1.0",
     "isomorphic-fetch": "2.2.1",
