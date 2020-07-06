@@ -1,5 +1,5 @@
 {
-  "name": "reactproject",
+  "name": "react-project",
   "version": "1.0.0",
   "description": "a webpack based react app for project management",
   "main": "./build/index.html",
