@@ -1,7 +1,7 @@
 {
   "name": "reactproject",
   "version": "1.0.0",
-  "description": "a webpack based react app for",
+  "description": "a webpack based react app for project management",
   "main": "./build/index.html",
   "scripts": {
     "webpack": "webpack",
